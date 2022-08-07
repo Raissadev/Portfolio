@@ -1,16 +1,10 @@
-version: '1.0.0'
-
+version: '3.7'
 services:
   postgres:
     image: postgres:14
     restart: always
     ports:
       - "5432:5432"
-    networks:
-      - Backend
-    volumes:
-      - ./db_data:/var/lib/postgresql/data
-      - ./app/config/init.sql:/docker-entrypoint-initdb.d/10-init.sql
     env_file:
       - ./Backend/.env
     healthcheck:
