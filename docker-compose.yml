@@ -1,0 +1,32 @@
+version: '1.0.0'
+
+services:
+  postgres:
+    image: postgres:14
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - Backend
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+      - ./app/config/init.sql:/docker-entrypoint-initdb.d/10-init.sql
+    env_file:
+      - ./Backend/.env
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "devdb", "-U", "dev"]
+      interval: 10s
+      timeout: 45s
+      retries: 10
+
+  app:
+    container_name: application
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    volumes:
+      - ./:/app
+    env_file:
+      - ./Frontend/.env
+      - ./Backend/.env
