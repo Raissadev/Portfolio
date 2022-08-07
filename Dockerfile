@@ -4,11 +4,13 @@ LABEL version="1.0.0"
 LABEL description="My portfolio"
 
 WORKDIR /app/
-COPY . ./
 
-RUN go mod download && \
-    go build
+COPY . /
 
-# EXPOSE $PORT
+RUN go mod download
 
-CMD ["go", "run"]
+RUN go build -o api main.go
+
+EXPOSE 4000
+
+CMD ["/app/api"]

@@ -7,11 +7,6 @@ services:
       - "5432:5432"
     env_file:
       - ./Backend/.env
-    healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "devdb", "-U", "dev"]
-      interval: 10s
-      timeout: 45s
-      retries: 10
 
   app:
     container_name: application
