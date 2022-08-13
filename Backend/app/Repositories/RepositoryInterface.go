@@ -1,13 +1,13 @@
 package repositories
 
 type RepositoryInterface interface {
-	All() string
+	All()
 }
 
 type Repository struct {
-	//
+	Interface RepositoryInterface
 }
 
 func (r *Repository) All() string {
-	return "helow"
+	return "hiol"
 }
