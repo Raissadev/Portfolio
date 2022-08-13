@@ -3,6 +3,7 @@ package routes
 import (
 	controllers "api/app/Http/Controllers"
 	utils "api/app/utils"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -18,7 +19,7 @@ func Router() *mux.Router {
 	router.PathPrefix("/api/v1")
 
 	// router.HandleFunc("/", YourHandler).Methods("GET")
-	controller.Index()
+	fmt.Println(controller.Index())
 
 	env.New()
 
