@@ -1,13 +1,15 @@
 package routes
 
 import (
+	utils "api/app/utils"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 )
+
+var env utils.LoadEnv
 
 func Router() *mux.Router {
 	router := mux.NewRouter()
@@ -15,10 +17,7 @@ func Router() *mux.Router {
 
 	// router.HandleFunc("/", YourHandler).Methods("GET")
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	env.New()
 
 	log.Fatal(http.ListenAndServe(os.Getenv("SERVER_PORT"), router))
 
