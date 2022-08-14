@@ -1,8 +1,16 @@
 package repositories
 
-import models "api/app/Models"
+import (
+	. "api/app/Models"
+	"fmt"
+)
 
 type UserRepository struct {
-	Model     models.User
-	Interface RepositoryInterface
+	Model User
+	RepositoryInterface
+}
+
+func (r *UserRepository) All() string {
+	fmt.Println(r.Model.GetAll())
+	return "asas"
 }

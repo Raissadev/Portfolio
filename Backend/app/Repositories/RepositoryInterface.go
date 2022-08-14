@@ -1,13 +1,9 @@
 package repositories
 
 type RepositoryInterface interface {
-	All()
-}
-
-type Repository struct {
-	Interface RepositoryInterface
-}
-
-func (r *Repository) All() string {
-	return "hiol"
+	All() string
+	Create() string
+	Update() string
+	Show() string
+	Delete() string
 }

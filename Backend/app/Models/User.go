@@ -1,6 +1,9 @@
 package models
 
-import "database/sql"
+import (
+	"database/sql"
+	"fmt"
+)
 
 type User struct {
 	ID         uint64 `json:"id"`
@@ -8,12 +11,13 @@ type User struct {
 	Email      string `json:"email"`
 	Updated_at string `json:"updated_at"`
 	Created_at string `json:"created_at"`
+	Db         *sql.DB
 }
 
-var db *sql.DB
 var user User
 
 func (us *User) Get(id uint64) (User, error) {
+	db := us.Db
 	query := `select title, content from users where id = $1`
 	row, err := db.Query(query, id)
 
@@ -41,37 +45,38 @@ func (us *User) Get(id uint64) (User, error) {
 	return user, nil
 }
 
-func (us *User) GetAll() ([]User, error) {
-	var users []User
+func (us *User) GetAll() string {
+	db := us.Db
 
-	query := `select id, name, email, created_at from users;`
+	// var users []User
 
-	rows, err := db.Query(query)
+	rows, _ := db.Query(`select * from users;`)
+	fmt.Println(rows, db)
+	// if err != nil {
+	// return users, err
+	// }
 
-	if err != nil {
-		return users, err
-	}
+	// defer rows.Close()
 
-	defer rows.Close()
+	// for rows.Next() {
+	// var id uint64
+	// var name, email string
 
-	for rows.Next() {
-		var id uint64
-		var name, email string
+	// err := rows.Scan(&id, &name, &email)
 
-		err := rows.Scan(&id, &name, &email)
+	// if err != nil {
+	// return users, err
+	// }
 
-		if err != nil {
-			return users, err
-		}
+	// user := User{
+	// ID:    id,
+	// Name:  name,
+	// Email: email,
+	// }
 
-		user := User{
-			ID:    id,
-			Name:  name,
-			Email: email,
-		}
+	// users = append(users, user)
+	// }
 
-		users = append(users, user)
-	}
-
-	return users, nil
+	return "helo"
+	// return users, nil
 }

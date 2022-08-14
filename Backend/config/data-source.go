@@ -5,8 +5,6 @@ import (
 	"database/sql"
 	"os"
 
-	"github.com/golang-migrate/migrate"
-	"github.com/golang-migrate/migrate/database/postgres"
 	_ "github.com/lib/pq"
 )
 
@@ -61,39 +59,5 @@ func (ds *DataSource) OpenConnection() (*sql.DB, error) {
 		panic(err)
 	}
 
-	ds.MigrateDB("postgresql://" + db.User + ":" + db.Password + "@" + db.Host + ":" + db.Port + "/" + db.Database + "?sslmode=" + db.SSLmode)
-
 	return conn, err
-}
-
-func (ds *DataSource) MigrateDB(connectionStr string) error {
-	db, err := sql.Open("postgres", connectionStr)
-	defer db.Close()
-
-	if err != nil {
-		logg.New()
-		return err
-	}
-
-	driver, err := postgres.WithInstance(db, &postgres.Config{})
-	if err != nil {
-		return err
-	}
-
-	m, err := migrate.NewWithDatabaseInstance(
-		"file://migrations",
-		"postgres", driver)
-	if err != nil {
-		logg.New()
-		return err
-	}
-
-	err = m.Steps(0)
-	if err != nil {
-		logg.New()
-		return err
-	}
-
-	defer m.Close()
-	return nil
 }
