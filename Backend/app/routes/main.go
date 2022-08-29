@@ -3,7 +3,6 @@ package routes
 import (
 	controllers "api/app/Http/Controllers"
 	utils "api/app/utils"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -16,10 +15,11 @@ var controller controllers.UserController
 
 func Router() *mux.Router {
 	router := mux.NewRouter()
-	router.PathPrefix("/api/v1")
+	// router.PathPrefix("/api/v1")
 
 	// router.HandleFunc("/", YourHandler).Methods("GET")
-	fmt.Println(controller.Index())
+	router.HandleFunc("/", controller.Index).Methods("GET")
+	// fmt.Println(controller.Index())
 
 	env.New()
 

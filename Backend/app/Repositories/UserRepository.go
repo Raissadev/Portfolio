@@ -2,7 +2,6 @@ package repositories
 
 import (
 	. "api/app/Models"
-	"fmt"
 )
 
 type UserRepository struct {
@@ -10,7 +9,6 @@ type UserRepository struct {
 	RepositoryInterface
 }
 
-func (r *UserRepository) All() string {
-	fmt.Println(r.Model.GetAll())
-	return "asas"
+func (r *UserRepository) All() []User {
+	return r.Model.GetAll()
 }

@@ -11,7 +11,7 @@ var dataSource config.DataSource
 func main() {
 	fmt.Println("Hello World")
 
-	dataSource.OpenConnection()
+	dataSource.Open()
 
 	routes.Router()
 }

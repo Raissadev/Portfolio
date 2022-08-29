@@ -2,14 +2,16 @@ package config
 
 import (
 	"api/app/utils"
-	"database/sql"
+	"log"
 	"os"
 
-	_ "github.com/lib/pq"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 var logg Logger
 var env utils.LoadEnv
+var Instance *gorm.DB
 
 type DataSource struct {
 	Host     string
@@ -26,7 +28,7 @@ type DataSourceInterface interface {
 
 func (ds *DataSource) New() *DataSource {
 	return &DataSource{
-		Host:     os.Getenv("APP_ENV"),
+		Host:     os.Getenv("POSTGRES_HOST"),
 		Port:     os.Getenv("POSTGRES_PORT"),
 		Password: os.Getenv("POSTGRES_PASSWORD"),
 		User:     os.Getenv("POSTGRES_USER"),
@@ -35,29 +37,15 @@ func (ds *DataSource) New() *DataSource {
 	}
 }
 
-func (ds *DataSource) OpenConnection() (*sql.DB, error) {
-	env.New()
-	db := ds.New()
+func (ds *DataSource) Open() {
+	// dbURL := ("postgres://" + ds.User + ":" + ds.Password + "@" + ds.Host + ":" + ds.Port + "/" + ds.Database)
+	dbURL := ("postgres://root:password@localhost:5432/portfolio")
 
-	conn, err := sql.Open(
-		"postgres",
-		"host="+db.Host+
-			" port="+db.Port+
-			" user="+db.User+
-			" password="+db.Password+
-			" dbname="+db.Database+
-			" sslmode="+db.SSLmode)
+	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 
 	if err != nil {
-		logg.New()
-		panic(err)
+		log.Fatalln(err)
 	}
 
-	err = conn.Ping()
-	if err != nil {
-		logg.New()
-		panic(err)
-	}
-
-	return conn, err
+	Instance = db
 }
