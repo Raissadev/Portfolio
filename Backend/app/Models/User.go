@@ -10,8 +10,6 @@ import (
 	"gorm.io/gorm"
 )
 
-var users []User
-var user User
 var dataSource config.DataSource
 
 type User struct {
@@ -23,12 +21,13 @@ type User struct {
 }
 
 func (us *User) Table() *gorm.DB {
-	dataSource.Open()
 	return config.Instance.Table("users")
 }
 
 func (us *User) Get(id uint64) (User, error) {
-	data := us.Table().First(&user, "id = ?", id)
+	var user User
+
+	data := us.Table().Find(&user, id)
 
 	if data.Error != nil {
 		errors.Is(data.Error, gorm.ErrRecordNotFound)
@@ -39,6 +38,8 @@ func (us *User) Get(id uint64) (User, error) {
 }
 
 func (us *User) GetAll() []User {
+	var users []User
+
 	all := us.Table().Find(&users)
 
 	if all.RowsAffected == 0 {
@@ -49,6 +50,7 @@ func (us *User) GetAll() []User {
 }
 
 func (us *User) Create(params *json.Decoder) (User, error) {
+	var user User
 	err := params.Decode(&user)
 
 	if err != nil {

@@ -28,6 +28,7 @@ type DataSourceInterface interface {
 }
 
 func (ds *DataSource) New() *DataSource {
+	env.New()
 	return &DataSource{
 		Host:     os.Getenv("POSTGRES_HOST"),
 		Port:     os.Getenv("POSTGRES_PORT"),
@@ -39,11 +40,10 @@ func (ds *DataSource) New() *DataSource {
 }
 
 func (ds *DataSource) Open() *gorm.DB {
-	// dbURL := ("postgres://" + ds.User + ":" + ds.Password + "@" + ds.Host + ":" + ds.Port + "/" + ds.Database)
-	dbURL := ("postgres://root:password@localhost:5432/portfolio")
+	data := ds.New()
+	dbURL := ("postgres://" + data.User + ":" + data.Password + "@" + data.Host + ":" + data.Port + "/" + data.Database)
 
 	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
-	// conn, err := db.DB()
 
 	if err != nil {
 		log.Fatalln(err)
@@ -65,4 +65,10 @@ func (ds *DataSource) Conn() (*sql.DB, error) {
 	Instance = db
 
 	return conn, nil
+}
+
+func CloseDB() error {
+	db, _ := Instance.DB()
+
+	return db.Close()
 }
