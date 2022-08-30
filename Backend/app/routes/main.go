@@ -18,7 +18,8 @@ func Router() *mux.Router {
 	// router.PathPrefix("/api/v1")
 
 	router.HandleFunc("/", controller.Index).Methods("GET")
-	router.HandleFunc("/{id}", controller.Show).Methods("GET")
+	router.HandleFunc("/", controller.Store).Methods("POST")
+	router.HandleFunc("/{id}", controller.Show).Methods("GET", "PUT", "DELETE")
 
 	env.New()
 

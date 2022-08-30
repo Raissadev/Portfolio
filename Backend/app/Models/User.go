@@ -2,24 +2,28 @@ package models
 
 import (
 	"api/config"
+	"encoding/json"
 	"errors"
 	"log"
+	"time"
 
 	"gorm.io/gorm"
 )
 
 var users []User
 var user User
+var dataSource config.DataSource
 
 type User struct {
-	ID         uint64 `json:"id" gorm:"primaryKey"`
-	Name       string `json:"name"`
-	Email      string `json:"email"`
-	Updated_at string `json:"updated_at"`
-	Created_at string `json:"created_at"`
+	ID         uint64    `json:"id" gorm:"primaryKey"`
+	Name       string    `json:"name"`
+	Email      string    `json:"email" gorm:"uniqueIndex"`
+	updated_at time.Time `json:"updated_at" gorm:"autoCreateTime"`
+	created_at time.Time `json:"created_at" gorm:"autoCreateTime"`
 }
 
 func (us *User) Table() *gorm.DB {
+	dataSource.Open()
 	return config.Instance.Table("users")
 }
 
@@ -42,4 +46,21 @@ func (us *User) GetAll() []User {
 	}
 
 	return users
+}
+
+func (us *User) Create(params *json.Decoder) (User, error) {
+	err := params.Decode(&user)
+
+	if err != nil {
+		return user, errors.New("error")
+	}
+
+	data := us.Table().Save(&user)
+
+	if data.Error != nil {
+		errors.Is(data.Error, gorm.ErrInvalidData)
+		return user, errors.New("error")
+	}
+
+	return user, nil
 }

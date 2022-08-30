@@ -2,6 +2,7 @@ package config
 
 import (
 	"api/app/utils"
+	"database/sql"
 	"log"
 	"os"
 
@@ -37,15 +38,31 @@ func (ds *DataSource) New() *DataSource {
 	}
 }
 
-func (ds *DataSource) Open() {
+func (ds *DataSource) Open() *gorm.DB {
 	// dbURL := ("postgres://" + ds.User + ":" + ds.Password + "@" + ds.Host + ":" + ds.Port + "/" + ds.Database)
 	dbURL := ("postgres://root:password@localhost:5432/portfolio")
 
 	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
+	// conn, err := db.DB()
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	Instance = db
+
+	return db
+}
+
+func (ds *DataSource) Conn() (*sql.DB, error) {
+	db := ds.Open()
+	conn, err := db.DB()
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	Instance = db
+
+	return conn, nil
 }

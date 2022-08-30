@@ -2,6 +2,7 @@ package repositories
 
 import (
 	. "api/app/Models"
+	"encoding/json"
 )
 
 type UserRepository struct {
@@ -15,4 +16,8 @@ func (r *UserRepository) All() []User {
 
 func (r *UserRepository) Get(id uint64) (User, error) {
 	return r.Model.Get(id)
+}
+
+func (r *UserRepository) Create(params *json.Decoder) (User, error) {
+	return r.Model.Create(params)
 }

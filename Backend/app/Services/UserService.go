@@ -3,6 +3,7 @@ package services
 import (
 	models "api/app/Models"
 	. "api/app/Repositories"
+	"encoding/json"
 )
 
 type UserService struct {
@@ -16,4 +17,8 @@ func (us *UserService) All() []models.User {
 
 func (us *UserService) Get(id uint64) (models.User, error) {
 	return us.Repository.Get(id)
+}
+
+func (us *UserService) Create(params *json.Decoder) (models.User, error) {
+	return us.Repository.Create(params)
 }

@@ -3,6 +3,7 @@ package controllers
 import (
 	services "api/app/Services"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -41,6 +42,20 @@ func (uc *UserController) Show(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte(err.Error()))
 		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(resp)
+}
+
+func (uc *UserController) Store(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	decoder := json.NewDecoder(r.Body)
+	resp, err := service.Create(decoder)
+
+	if err != nil {
+		fmt.Println("err")
 	}
 
 	w.WriteHeader(http.StatusOK)
