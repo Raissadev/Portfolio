@@ -13,6 +13,7 @@ import (
 
 var env utils.LoadEnv
 var userController UserController
+var mailController MailController
 
 func Router() *mux.Router {
 	pmw := PermissionMiddleware{Token: make(map[string]string)}
@@ -33,6 +34,9 @@ func Router() *mux.Router {
 	us.HandleFunc("/{id}", userController.Show).Methods("GET")
 	us.HandleFunc("/{id}", userController.Update).Methods("PUT")
 	us.HandleFunc("/{id}", userController.Delete).Methods("DELETE")
+
+	ml := r.PathPrefix("/mail").Subrouter()
+	ml.HandleFunc("", mailController.Store).Methods("POST")
 
 	env.New()
 	log.Fatal(http.ListenAndServe(os.Getenv("SERVER_PORT"), router))
