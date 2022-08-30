@@ -15,7 +15,7 @@ var dataSource config.DataSource
 type User struct {
 	ID         uint64    `json:"id" gorm:"primaryKey"`
 	Name       string    `json:"name"`
-	Email      string    `json:"email" gorm:"uniqueIndex"`
+	Email      string    `json:"email" gorm:"unique"`
 	updated_at time.Time `json:"updated_at" gorm:"autoCreateTime"`
 	created_at time.Time `json:"created_at" gorm:"autoCreateTime"`
 }
@@ -29,7 +29,7 @@ func (us *User) Get(id uint64) (User, error) {
 
 	data := us.Table().Find(&user, id)
 
-	if data.Error != nil {
+	if data.Error != nil || data.RowsAffected == 0 {
 		errors.Is(data.Error, gorm.ErrRecordNotFound)
 		return user, errors.New("not found")
 	}
@@ -65,4 +65,50 @@ func (us *User) Create(params *json.Decoder) (User, error) {
 	}
 
 	return user, nil
+}
+
+func (us *User) Update(id uint64, params *json.Decoder) (User, error) {
+	var user User
+
+	data := us.Table().Find(&user, id)
+
+	if data.Error != nil || data.RowsAffected == 0 {
+		log.Default().Println("Not found")
+		return user, errors.New("not found")
+	}
+
+	err := params.Decode(&user)
+
+	if err != nil {
+		return user, errors.New("error")
+	}
+
+	up := us.Table().Save(&user)
+
+	if up.Error != nil || up.RowsAffected == 0 {
+		errors.Is(up.Error, gorm.ErrInvalidData)
+		return user, errors.New("error")
+	}
+
+	return user, nil
+}
+
+func (us *User) Delete(id uint64) (bool, error) {
+	var user User
+
+	data := us.Table().Find(&user, id)
+
+	if data.RowsAffected == 0 {
+		log.Default().Println("not found")
+		return false, errors.New("not found")
+	}
+
+	del := us.Table().Delete(&user)
+
+	if del.Error != nil {
+		errors.Is(del.Error, gorm.ErrInvalidData)
+		return false, errors.New("error")
+	}
+
+	return true, nil
 }

@@ -1,7 +1,8 @@
 package routes
 
 import (
-	controllers "api/app/Http/Controllers"
+	. "api/app/Http/Controllers"
+	. "api/app/Http/Middlewares"
 	utils "api/app/utils"
 	"log"
 	"net/http"
@@ -11,18 +12,29 @@ import (
 )
 
 var env utils.LoadEnv
-var controller controllers.UserController
+var userController UserController
 
 func Router() *mux.Router {
-	router := mux.NewRouter()
-	// router.PathPrefix("/api/v1")
+	pmw := PermissionMiddleware{Token: make(map[string]string)}
+	pmw.Populate()
+	headers := HeadersDefaultMiddleware{}
 
-	router.HandleFunc("/", controller.Index).Methods("GET")
-	router.HandleFunc("/", controller.Store).Methods("POST")
-	router.HandleFunc("/{id}", controller.Show).Methods("GET", "PUT", "DELETE")
+	router := mux.NewRouter()
+
+	router.Use(mux.CORSMethodMiddleware(router))
+	router.Use(pmw.Middleware)
+	router.Use(headers.Middleware)
+
+	r := router.PathPrefix("/api/v1").Subrouter()
+
+	us := r.PathPrefix("/users").Subrouter()
+	us.HandleFunc("", userController.Index).Methods("GET")
+	us.HandleFunc("", userController.Store).Methods("POST")
+	us.HandleFunc("/{id}", userController.Show).Methods("GET")
+	us.HandleFunc("/{id}", userController.Update).Methods("PUT")
+	us.HandleFunc("/{id}", userController.Delete).Methods("DELETE")
 
 	env.New()
-
 	log.Fatal(http.ListenAndServe(os.Getenv("SERVER_PORT"), router))
 
 	return router

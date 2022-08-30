@@ -21,3 +21,11 @@ func (r *UserRepository) Get(id uint64) (User, error) {
 func (r *UserRepository) Create(params *json.Decoder) (User, error) {
 	return r.Model.Create(params)
 }
+
+func (r *UserRepository) Update(id uint64, params *json.Decoder) (User, error) {
+	return r.Model.Update(id, params)
+}
+
+func (r *UserRepository) Delete(id uint64) (bool, error) {
+	return r.Model.Delete(id)
+}
