@@ -2,7 +2,6 @@ package models
 
 import (
 	"api/app/utils"
-	"encoding/json"
 	"net/smtp"
 	"os"
 )
@@ -12,9 +11,9 @@ var env utils.LoadEnv
 type Mail struct {
 	Host         string
 	Port         string
-	Subject      string `json:"subject"`
-	Message      string `json:"message"`
-	Sender       string `json:"email"`
+	Subject      string `json:"subject" validate:"min=3,max=40"`
+	Message      string `json:"message" validate:"min=3,max=40"`
+	Sender       string `json:"email" validate:"min=3,max=40,regexp=^[_A-Za-z0-9+-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2\\,})$"`
 	MailReceiver *MailReceiver
 }
 
@@ -38,15 +37,10 @@ func (m *Mail) New() *Mail {
 	}
 }
 
-func (m *Mail) Send(params *json.Decoder) (Mail, error) {
-	var mail Mail
+func (m *Mail) Send(params Mail) (Mail, error) {
 	s := m.New()
 
-	err := params.Decode(&mail)
-
-	if err != nil {
-		return mail, err
-	}
+	mail := params
 
 	auth := smtp.PlainAuth("", s.MailReceiver.receiver, s.MailReceiver.password, s.Host)
 
@@ -58,10 +52,14 @@ func (m *Mail) Send(params *json.Decoder) (Mail, error) {
 		` + mail.Message + `
 	`
 
-	err = smtp.SendMail(
+	err := smtp.SendMail(
 		s.Host+":"+s.Port,
 		auth, s.MailReceiver.mail, []string{mail.Sender},
 		[]byte(msg))
+
+	if err != nil {
+		return mail, err
+	}
 
 	return mail, nil
 }

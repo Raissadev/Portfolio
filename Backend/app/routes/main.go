@@ -23,12 +23,12 @@ func Router() *mux.Router {
 	router := mux.NewRouter()
 
 	router.Use(mux.CORSMethodMiddleware(router))
-	router.Use(pmw.Middleware)
 	router.Use(headers.Middleware)
 
 	r := router.PathPrefix("/api/v1").Subrouter()
 
 	us := r.PathPrefix("/users").Subrouter()
+	us.Use(pmw.Middleware)
 	us.HandleFunc("", userController.Index).Methods("GET")
 	us.HandleFunc("", userController.Store).Methods("POST")
 	us.HandleFunc("/{id}", userController.Show).Methods("GET")

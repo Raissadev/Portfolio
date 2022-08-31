@@ -10,7 +10,6 @@ import (
 	"gorm.io/gorm"
 )
 
-var logg Logger
 var env utils.LoadEnv
 var Instance *gorm.DB
 
