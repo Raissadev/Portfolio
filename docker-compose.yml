@@ -1,4 +1,5 @@
 version: '3.7'
+
 services:
   postgres:
     image: postgres:14
@@ -7,11 +8,8 @@ services:
       - "5432:5432"
     env_file:
       - ./Backend/.env
-    volumes:
-    - db:/var/lib/postgresql/data
-
-volumes:
-  db:
+    # volumes:
+    # - db:/var/lib/postgresql/data
 
   # app:
   #   container_name: application
