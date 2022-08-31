@@ -1,3 +1,5 @@
 /Backend/.env
 /Backend/tests
 /Frontend/.env
+/Frontend/node_modules
+/Frontend/yarn.lock
