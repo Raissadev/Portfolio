@@ -49,15 +49,14 @@ func (us *User) GetAll() []User {
 }
 
 func (us *User) Create(params User) (User, error) {
-	user := params
-	data := us.Table().Save(&user)
+	data := us.Table().Save(&params)
 
 	if data.Error != nil {
 		errors.Is(data.Error, gorm.ErrInvalidData)
-		return user, errors.New("error")
+		return params, errors.New("error")
 	}
 
-	return user, nil
+	return params, nil
 }
 
 func (us *User) Update(id uint64, params User) (User, error) {
