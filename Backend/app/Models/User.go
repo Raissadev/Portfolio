@@ -14,7 +14,7 @@ var dataSource config.DataSource
 type User struct {
 	ID         uint64    `json:"id" gorm:"primaryKey"`
 	Name       string    `json:"name" validate:"min=3,max=40"`
-	Email      string    `json:"email" validate:"min=3,max=40" gorm:"unique"`
+	Email      string    `json:"email" validate:"min=3,max=40,regexp=^[_A-Za-z0-9+-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2\\,})$" gorm:"unique"`
 	updated_at time.Time `json:"updated_at" gorm:"autoCreateTime"`
 	created_at time.Time `json:"created_at" gorm:"autoCreateTime"`
 }
