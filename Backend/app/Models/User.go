@@ -2,7 +2,6 @@ package models
 
 import (
 	"api/config"
-	"encoding/json"
 	"errors"
 	"log"
 	"time"
@@ -14,8 +13,8 @@ var dataSource config.DataSource
 
 type User struct {
 	ID         uint64    `json:"id" gorm:"primaryKey"`
-	Name       string    `json:"name"`
-	Email      string    `json:"email" gorm:"unique"`
+	Name       string    `json:"name" validate:"min=3,max=40"`
+	Email      string    `json:"email" validate:"min=3,max=40" gorm:"unique"`
 	updated_at time.Time `json:"updated_at" gorm:"autoCreateTime"`
 	created_at time.Time `json:"created_at" gorm:"autoCreateTime"`
 }
@@ -49,14 +48,8 @@ func (us *User) GetAll() []User {
 	return users
 }
 
-func (us *User) Create(params *json.Decoder) (User, error) {
-	var user User
-	err := params.Decode(&user)
-
-	if err != nil {
-		return user, errors.New("error")
-	}
-
+func (us *User) Create(params User) (User, error) {
+	user := params
 	data := us.Table().Save(&user)
 
 	if data.Error != nil {
@@ -67,7 +60,7 @@ func (us *User) Create(params *json.Decoder) (User, error) {
 	return user, nil
 }
 
-func (us *User) Update(id uint64, params *json.Decoder) (User, error) {
+func (us *User) Update(id uint64, params User) (User, error) {
 	var user User
 
 	data := us.Table().Find(&user, id)
@@ -77,12 +70,7 @@ func (us *User) Update(id uint64, params *json.Decoder) (User, error) {
 		return user, errors.New("not found")
 	}
 
-	err := params.Decode(&user)
-
-	if err != nil {
-		return user, errors.New("error")
-	}
-
+	user.Name = params.Name
 	up := us.Table().Save(&user)
 
 	if up.Error != nil || up.RowsAffected == 0 {

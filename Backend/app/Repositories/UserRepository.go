@@ -3,6 +3,8 @@ package repositories
 import (
 	. "api/app/Models"
 	"encoding/json"
+
+	"gopkg.in/validator.v2"
 )
 
 type UserRepository struct {
@@ -19,11 +21,39 @@ func (r *UserRepository) Get(id uint64) (User, error) {
 }
 
 func (r *UserRepository) Create(params *json.Decoder) (User, error) {
-	return r.Model.Create(params)
+	var user User
+
+	err := params.Decode(&user)
+
+	if err != nil {
+		return user, err
+	}
+
+	err = validator.Validate(&user)
+
+	if err != nil {
+		return user, err
+	}
+
+	return r.Model.Create(user)
 }
 
 func (r *UserRepository) Update(id uint64, params *json.Decoder) (User, error) {
-	return r.Model.Update(id, params)
+	var user User
+
+	err := params.Decode(&user)
+
+	if err != nil {
+		return user, err
+	}
+
+	err = validator.Validate(&user)
+
+	if err != nil {
+		return user, err
+	}
+
+	return r.Model.Update(id, user)
 }
 
 func (r *UserRepository) Delete(id uint64) (bool, error) {
