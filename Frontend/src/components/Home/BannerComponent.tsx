@@ -8,7 +8,7 @@ function BannerComponent(): any
 {
     return(
         <>
-            <Layout className="banner-home">
+            <Layout className="banner-home" id="home">
                 <Row>
                     <Image width={300} src={myImage} />
                 </Row>

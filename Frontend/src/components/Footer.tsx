@@ -22,7 +22,7 @@ function Foot(): any
                         </Button>
                     </Col>
                 </Row>
-                <Row align="middle" justify="center">
+                <Row align="middle" justify="center" id="medias">
                     <Button href="https://github.com/Raissadev" type="link">GitHub</Button>
                     <Button href="https://www.linkedin.com/in/raissadev" type="link">Linkedin</Button>
                     <Button href="https://www.instagram.com/raissa_dev" type="link">Instagram</Button>

@@ -6,7 +6,7 @@ function MessageComponent(): any
 {
     return(
         <>
-            <Layout className="message-component">
+            <Layout className="message-component" id="work">
                 <Title level={1}>
                     Hey! I'm Raissa, an 18 year old <br />
                     <span>software engineer</span>. I am passionate <br />

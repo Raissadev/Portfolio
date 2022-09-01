@@ -45,13 +45,13 @@ function Head(): any
                         <Col span={6} offset={6}>
                             <Menu mode="horizontal">
                                 <Menu.Item key="home">
-                                    Home
+                                    <a href="#home">Home</a>
                                 </Menu.Item>
                                 <Menu.Item key="work">
-                                    Work
+                                    <a href="#work">Work</a>
                                 </Menu.Item>
                                 <Menu.Item key="media">
-                                    Medias
+                                    <a href="#medias">Medias</a>
                                 </Menu.Item>
                                 <Menu.Item key="email" onClick={showModal}>
                                     Email
