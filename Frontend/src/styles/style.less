@@ -13,12 +13,28 @@ header.ant-layout-header {
 }
 
 section.banner-home {
-    min-height: 80vh;
+    min-height: 75vh;
     align-items: center;
     justify-content: center;
 
     & .ant-row:first-child {
         margin-bottom: 3rem;
+    }
+
+    & .ant-row:nth-of-type(2) {
+
+        & .ant-col:first-child {
+            margin-bottom: 2.5rem;
+        }
+
+        & .ant-col:last-child {
+            text-align: center;
+        }
+
+        & button.ant-btn {
+            height: 55px;
+            padding: 6.4px 6rem;
+        }
     }
 
     & img.ant-image-img {
@@ -31,5 +47,40 @@ section.banner-home {
         text-align: center;
         font-size: 4.2rem;
         letter-spacing: 2px;
+    }
+
+    & .ant-row.attach h4 {
+        position: absolute;
+        left: -8%;
+        bottom: 10%;
+        transform: rotate(-90deg);
+        display: flex;
+        flex-direction: row;
+
+        & span {
+            margin-right: 1rem;
+            letter-spacing: -5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row-reverse;
+
+            & .anticon {
+                margin: 0 !important;
+            }
+        }
+    }
+}
+
+section.message-component {
+    padding: 15rem 10rem;
+    text-align: center;
+
+    & h1.ant-typography {
+        font-size: 4.4rem;
+
+        & span {
+            text-decoration: underline;
+        }
     }
 }
