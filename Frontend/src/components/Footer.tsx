@@ -23,10 +23,10 @@ function Foot(): any
                     </Col>
                 </Row>
                 <Row align="middle" justify="center">
-                    <Button type="link">GitHub</Button>
-                    <Button type="link">Linkedin</Button>
-                    <Button type="link">Instagram</Button>
-                    <Button type="link">Twitter</Button>
+                    <Button href="https://github.com/Raissadev" type="link">GitHub</Button>
+                    <Button href="https://www.linkedin.com/in/raissadev" type="link">Linkedin</Button>
+                    <Button href="https://www.instagram.com/raissa_dev" type="link">Instagram</Button>
+                    <Button href="https://twitter.com/Raissa_Dev" type="link">Twitter</Button>
                 </Row>
                 <Row align="middle" justify="center">
                     <Title level={4}>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from '../services/api';
 import { MailProperty, MailPattern } from "../@types/mail";
-import { Col, Row, Modal, Layout, Menu, Typography, Form, Input } from 'antd';
+import { Col, Row, Modal, Layout, Menu, Typography, Form, Input, Alert } from 'antd';
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -10,6 +10,7 @@ const { TextArea } = Input;
 function Head(): any
 {
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     const showModal = () => {
       setIsModalVisible(true);
@@ -19,10 +20,11 @@ function Head(): any
         await api.post("/mail", mail)
         .then( (response: any) => {
             setIsModalVisible(false);
+            setIsVisible(true);
         })
         .catch( (err: any) => {
-            mail.message = "Invalid!";
         })
+        mail.response = "Email successfully sent";
     };
   
     const handleCancel = () => {
@@ -74,9 +76,9 @@ function Head(): any
                             rules={[{ required: true, message: 'Please input your name!' }]}
                         >
                             <Input
-                                placeholder="Name"
+                                placeholder="Subject"
                                 type="text"
-                                onChange={(val: any) => setMail({ ...mail, name: val.target.value })}
+                                onChange={(val: any) => setMail({ ...mail, subject: val.target.value })}
                             />
                         </Form.Item>
                         <Form.Item
@@ -101,6 +103,14 @@ function Head(): any
                         </Form.Item>
                     </Form>
                 </Modal>
+
+                <Alert
+                    message={mail.response}
+                    type="success"
+                    showIcon
+                    closable={true}
+                    style={{ display: isVisible ? 'flex' : 'none' }}
+                />
             </Layout>
         </>
     );

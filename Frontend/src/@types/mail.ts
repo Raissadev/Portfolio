@@ -1,17 +1,17 @@
 type MailProperty =
 {
-    name: string,
     email: string,
     subject: string,
     message: string,
+    response: string,
 }
 
 const MailPattern: MailProperty =
 {
-    name: "",
     email: "",
     subject: "",
     message: "",
+    response: "",
 }
 
 export { type MailProperty, MailPattern };

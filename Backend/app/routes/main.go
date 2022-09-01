@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 var env utils.LoadEnv
@@ -16,6 +17,7 @@ var userController UserController
 var mailController MailController
 
 func Router() *mux.Router {
+	env.New()
 	pmw := PermissionMiddleware{Token: make(map[string]string)}
 	pmw.Populate()
 	headers := HeadersDefaultMiddleware{}
@@ -38,8 +40,14 @@ func Router() *mux.Router {
 	ml := r.PathPrefix("/mail").Subrouter()
 	ml.HandleFunc("", mailController.Store).Methods("POST")
 
-	env.New()
-	log.Fatal(http.ListenAndServe(os.Getenv("SERVER_PORT"), router))
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{os.Getenv("URL_FRONT")},
+		AllowCredentials: true,
+	})
+
+	handler := c.Handler(router)
+
+	log.Fatal(http.ListenAndServe(os.Getenv("SERVER_PORT"), handler))
 
 	return router
 }
