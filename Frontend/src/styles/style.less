@@ -90,7 +90,8 @@ section.message-component {
 }
 
 section.boxes-component {
-    
+    margin-bottom: 8rem;
+
     & .ant-col {
 
         & button.ant-btn {
@@ -114,6 +115,27 @@ section.boxes-component {
             background-color: rgb(9,4,16);
             border-top: 10px transparent !important;
             background: linear-gradient(to bottom, rgba(255,0,0,0), #08030F);
+        }
+    }
+}
+
+section.interests-component {
+
+    & .ant-col h2.ant-typography {
+        font-size: 4.5rem;
+    }
+
+    & .ant-col img.ant-image-img {
+        height: 70vh;
+    }
+
+    & .ant-divider-horizontal.ant-divider-with-text {
+        align-items: center;
+        margin-bottom: 2.5em !important;
+
+        &.ant-divider-no-default-orientation-margin-left::after {
+            height: 2px;
+            background-color: @white-weak;
         }
     }
 }

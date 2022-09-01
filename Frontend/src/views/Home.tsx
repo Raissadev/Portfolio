@@ -2,6 +2,7 @@ import { Layout } from 'antd';
 import Head from "../components/Header";
 import BannerComponent from '../components/Home/BannerComponent';
 import BoxComponent from '../components/Home/BoxComponent';
+import InterestsComponent from '../components/Home/InterestsComponent';
 import MessageComponent from '../components/Home/MessageComponent';
 
 function Home(): any
@@ -20,6 +21,10 @@ function Home(): any
 
             <Layout>
                 <BoxComponent />
+            </Layout>
+
+            <Layout>
+                <InterestsComponent />
             </Layout>
         </>
     );

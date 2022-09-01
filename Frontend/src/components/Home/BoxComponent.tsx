@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { Row, Col, Layout, Typography, Button, Popover, Divider } from 'antd';
+import { Row, Col, Layout, Button, Popover, Divider } from 'antd';
 import { CloudDownloadOutlined, RadarChartOutlined, HeatMapOutlined } from '@ant-design/icons';
-
-const { Title } = Typography;
 
 function BoxComponent(): any
 {
