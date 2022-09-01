@@ -16,7 +16,31 @@ function InterestsComponent(): any
                         </Divider>
                     </Col>
                     <Col>
-                        <Image width={800} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
+                        <Image width={1000} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}>
+                        <Divider orientation="right" orientationMargin="0">
+                            <Title level={2}>
+                                Backend
+                            </Title>
+                        </Divider>
+                    </Col>
+                    <Col>
+                        <Image width={1000} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}>
+                        <Divider orientation="left" orientationMargin="0">
+                            <Title level={2}>
+                                Frontend
+                            </Title>
+                        </Divider>
+                    </Col>
+                    <Col>
+                        <Image width={1000} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
                     </Col>
                 </Row>
             </Layout>
