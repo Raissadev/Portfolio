@@ -1,5 +1,5 @@
 import { Row, Col, Layout, Button, Popover, Divider } from 'antd';
-import { CloudDownloadOutlined, RadarChartOutlined, HeatMapOutlined } from '@ant-design/icons';
+import { QqOutlined, RadarChartOutlined, HeatMapOutlined } from '@ant-design/icons';
 
 function BoxComponent(): any
 {
@@ -14,7 +14,7 @@ function BoxComponent(): any
                             trigger="hover"
                         >
                             <Button>
-                                <CloudDownloadOutlined />
+                                <QqOutlined />
                             </Button>
                         </Popover>
                         <Divider />
