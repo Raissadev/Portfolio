@@ -1,4 +1,7 @@
 import { Row, Col, Layout, Typography, Divider, Image } from 'antd';
+import networks from '../../assets/networks.jpg';
+import back from '../../assets/back.jpg';
+import front from '../../assets/front.jpg';
 
 const { Title } = Typography;
 
@@ -16,7 +19,7 @@ function InterestsComponent(): any
                         </Divider>
                     </Col>
                     <Col>
-                        <Image width={1000} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
+                        <Image width={1000} src={networks}/>
                     </Col>
                 </Row>
                 <Row>
@@ -28,7 +31,7 @@ function InterestsComponent(): any
                         </Divider>
                     </Col>
                     <Col>
-                        <Image width={1000} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
+                        <Image width={1000} src={back}/>
                     </Col>
                 </Row>
                 <Row>
@@ -40,7 +43,7 @@ function InterestsComponent(): any
                         </Divider>
                     </Col>
                     <Col>
-                        <Image width={1000} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
+                        <Image width={1000} src={front}/>
                     </Col>
                 </Row>
             </Layout>

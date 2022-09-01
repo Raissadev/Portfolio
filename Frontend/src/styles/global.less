@@ -16,6 +16,10 @@ h1, h2, h3, h4 {
     margin: 0 !important;
 }
 
+p {
+    color: @white-weak !important;
+}
+
 // Images
 
 img.ant-image-img {
@@ -30,7 +34,7 @@ button.ant-btn {
     border: 1px solid @white !important;
 }
 
-// Boxes
+// Boxes, Forms and Modals
 
 .ant-popover-inner {
     background-color: @dark-default !important;
@@ -47,5 +51,45 @@ button.ant-btn {
 
     & .ant-popover-arrow .ant-popover-arrow-content {
         --antd-arrow-background-color: @dark-default !important;
+    }
+}
+
+.ant-modal-content {
+    background-color: @dark-default !important;
+
+    & .ant-modal-header {
+        background: @dark-default !important;
+        border-bottom: 1px solid @dark-weak !important;
+    }
+
+    & .ant-modal-title {
+        color: @white !important;
+    }
+
+    & .ant-modal-footer {
+        border-top: 1px solid @dark-weak !important;
+
+        & button.ant-btn {
+            background: @dark !important;
+            color: @white-weak !important;
+            border: 1px solid @dark-default !important;
+            border-radius: 3px !important;
+        }
+    }
+}
+
+form.ant-form {
+
+    & .ant-form-item {
+
+        & .ant-col-16 {
+            max-width: 100%;
+        }
+
+        & .ant-input {
+            background: @dark-weak !important;
+            border-color: @dark-weak !important;
+            color: @white !important;
+        }
     }
 }
