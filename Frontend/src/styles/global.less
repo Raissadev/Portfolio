@@ -29,3 +29,23 @@ button.ant-btn {
     border-radius: 2px !important;
     border: 1px solid @white !important;
 }
+
+// Boxes
+
+.ant-popover-inner {
+    background-color: @dark-default !important;
+    max-width: 30vw !important;
+
+    & .ant-popover-title {
+        color: @white;
+        border-color: @dark-weak !important;
+    }
+
+    & .ant-popover-inner-content {
+        color: @white-weak;
+    }
+
+    & .ant-popover-arrow .ant-popover-arrow-content {
+        --antd-arrow-background-color: @dark-default !important;
+    }
+}
