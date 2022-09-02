@@ -10,6 +10,33 @@ header.ant-layout-header {
             font-weight: 600;
         }
     }
+
+    @media @tablet {
+        & .ant-menu {
+            justify-content: flex-end;
+        }
+    }
+
+    @media @phone {
+        & .ant-menu {
+            justify-content: flex-end;
+        }
+    }
+}
+
+div.ant-menu-submenu-popup {
+    & .ant-menu {
+        background: @dark !important;
+    }
+
+    & .ant-menu-item a {
+        color: @white !important;
+    }
+
+    &:not(.ant-menu-horizontal) .ant-menu-item-selected {
+        background-color: @dark-default !important;
+        color: @white !important;
+    }
 }
 
 section.default {
@@ -18,6 +45,7 @@ section.default {
 
 section.banner-home {
     min-height: 75vh;
+    padding: 9rem 1rem 7rem 1rem;
     align-items: center;
     justify-content: center;
 
@@ -38,19 +66,45 @@ section.banner-home {
         & button.ant-btn {
             height: 55px;
             padding: 6.4px 6rem;
+
+            @media @tablet {
+                & {
+                    height: 45px;
+                    padding: 6.4px 4rem;
+                }
+            }
+        
+            @media @phone {
+                & {
+                    height: 45px;
+                    padding: 6.4px 4rem;
+                }
+            }
         }
     }
 
     & img.ant-image-img {
         border-radius: 50%;
-        width: 300px;
-        height: 300px;
+        width: 320px;
+        height: 320px;
     }
     
     & h1.ant-typography {
         text-align: center;
         font-size: 4.2rem;
         letter-spacing: 2px;
+
+        @media @tablet {
+            & {
+                font-size: 2.2rem;
+            }
+        }
+    
+        @media @phone {
+            & {
+                font-size: 2.2rem;
+            }
+        }
     }
 
     & .ant-row.attach h4 {
@@ -85,6 +139,18 @@ section.message-component {
 
         & span {
             text-decoration: underline;
+        }
+
+        @media @tablet {
+            & {
+                font-size: 2.7rem;
+            }
+        }
+    
+        @media @phone {
+            & {
+                font-size: 2.7rem;
+            }
         }
     }
 }

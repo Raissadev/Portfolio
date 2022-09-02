@@ -1,11 +1,16 @@
+import React, { useState } from "react";
+import { FormProperty, FormPattern } from "../@types/form-modal";
 import { Row, Col, Layout, Typography, Button } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
+import Modall from "../components/Modal";
 
 const { Title } = Typography;
 const { Footer } = Layout;
 
 function Foot(): any
 {
+    const [form, setForm] = useState<FormProperty>(FormPattern);
+
     return(
         <>
             <Footer>
@@ -16,7 +21,11 @@ function Foot(): any
                         </Title>
                     </Col>
                     <Col span={24}>
-                        <Button type="primary" size="large">
+                        <Button
+                            type="primary"
+                            size="large"
+                            onClick={() => setForm({...form, visibleModal: !form.visibleModal})}
+                        >
                             Send mail
                             <RightOutlined />
                         </Button>
@@ -33,6 +42,11 @@ function Foot(): any
                         ©2022 raissadev - All rights reserved
                     </Title>
                 </Row>
+
+                <Modall
+                    show={form.visibleModal}
+                    handleAction={() => setForm({...form, visibleModal: !form.visibleModal})}
+                />
             </Footer>
         </>
     );
