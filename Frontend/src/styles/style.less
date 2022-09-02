@@ -126,45 +126,49 @@ section.banner-home {
         }
     }
 
-    & .ant-row.attach h4 {
-        position: absolute;
-        left: -8%;
-        bottom: 10%;
-        transform: rotate(-90deg);
+    & .ant-row.attach {
+        position: relative;
+        height: 0vh;
+        width: 100%;
         display: flex;
-        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
 
-        & span {
-            margin-right: 1rem;
-            letter-spacing: -5px;
+        & h4 {
+            margin-left: -5% !important;
+            transform: rotate(-90deg);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: row-reverse;
+            flex-direction: row;
 
-            & .anticon {
-                margin: 0 !important;
-            }
-        }
+            & span {
+                margin-right: 1rem;
+                letter-spacing: -5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row-reverse;
 
-        @media @tablet {
-            & {
-                left: -20%;
-                bottom: 20%;
+                & .anticon {
+                    margin: 0 !important;
+                }
             }
-        }
-    
-        @media @phone {
-            & {
-                left: -20%;
-                bottom: 20%;
-            }
-        }
 
-        @media @small {
-            & {
-                left: -30%;
-                bottom: 30%;
+            @media @tablet {
+                & {
+                    margin-left: -20% !important;
+                }
+            }
+        
+            @media @phone {
+                & {
+                    margin-left: -30% !important;
+                }
+            }
+
+            @media @small {
+                & {
+                    margin-left: -40% !important;
+                }
             }
         }
     }
