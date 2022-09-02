@@ -1,5 +1,5 @@
 header.ant-layout-header {
-    background: @dark;
+    background: transparent;
 
     & .ant-row .ant-menu-horizontal {
         background: transparent;
@@ -99,6 +99,7 @@ section.banner-home {
         border-radius: 50%;
         width: 320px;
         height: 320px;
+        filter: grayscale(1);
     }
     
     & h1.ant-typography {
@@ -139,6 +140,32 @@ section.banner-home {
                 margin: 0 !important;
             }
         }
+
+        @media @tablet {
+            & {
+                left: -20%;
+                bottom: 20%;
+            }
+        }
+    
+        @media @phone {
+            & {
+                left: -20%;
+                bottom: 20%;
+            }
+        }
+    }
+
+    @media @tablet {
+        & {
+            padding: 3rem 1rem 7rem 1rem;
+        }
+    }
+
+    @media @phone {
+        & {
+            padding: 3rem 1rem 7rem 1rem;
+        }
     }
 }
 
@@ -155,14 +182,26 @@ section.message-component {
 
         @media @tablet {
             & {
-                font-size: 2.7rem;
+                font-size: 2.5rem;
             }
         }
     
         @media @phone {
             & {
-                font-size: 2.7rem;
+                font-size: 2.5rem;
             }
+        }
+    }
+
+    @media @tablet {
+        & {
+            padding: 8rem 2rem;
+        }
+    }
+
+    @media @phone {
+        & {
+            padding: 8rem 2rem;
         }
     }
 }
