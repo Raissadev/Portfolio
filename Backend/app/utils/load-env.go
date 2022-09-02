@@ -6,6 +6,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+var Lenv *LoadEnv
+
 type LoadInterface interface {
 	LoadEnv()
 }
@@ -20,6 +22,8 @@ func (l *LoadEnv) New() *LoadEnv {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
+	Lenv = l
 
 	return l
 }

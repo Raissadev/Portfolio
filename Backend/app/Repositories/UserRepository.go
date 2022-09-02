@@ -9,7 +9,15 @@ import (
 
 type UserRepository struct {
 	Model User
-	RepositoryInterface
+	UserRepositoryInterface
+}
+
+type UserRepositoryInterface interface {
+	All() []User
+	Get(id uint64) (User, error)
+	Create(params *json.Decoder) (User, error)
+	Update(id uint64, params *json.Decoder) (User, error)
+	Delete(id uint64) (bool, error)
 }
 
 func (r *UserRepository) All() []User {

@@ -9,7 +9,11 @@ import (
 
 type MailRepository struct {
 	Model Mail
-	RepositoryInterface
+	MailRepositoryInterface
+}
+
+type MailRepositoryInterface interface {
+	Send(params *json.Decoder) (Mail, error)
 }
 
 func (r *MailRepository) Send(params *json.Decoder) (Mail, error) {

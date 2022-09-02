@@ -3,7 +3,7 @@ package routes
 import (
 	. "api/app/Http/Controllers"
 	. "api/app/Http/Middlewares"
-	utils "api/app/utils"
+	. "api/app/utils"
 	"log"
 	"net/http"
 	"os"
@@ -12,12 +12,9 @@ import (
 	"github.com/rs/cors"
 )
 
-var env utils.LoadEnv
-var userController UserController
-var mailController MailController
+var env = Lenv
 
 func Router() *mux.Router {
-	env.New()
 	pmw := PermissionMiddleware{Token: make(map[string]string)}
 	pmw.Populate()
 	headers := HeadersDefaultMiddleware{}
@@ -31,14 +28,13 @@ func Router() *mux.Router {
 
 	us := r.PathPrefix("/users").Subrouter()
 	us.Use(pmw.Middleware)
-	us.HandleFunc("", userController.Index).Methods("GET")
-	us.HandleFunc("", userController.Store).Methods("POST")
-	us.HandleFunc("/{id}", userController.Show).Methods("GET")
-	us.HandleFunc("/{id}", userController.Update).Methods("PUT")
-	us.HandleFunc("/{id}", userController.Delete).Methods("DELETE")
-
+	us.HandleFunc("", (&UserController{}).Index).Methods("GET")
+	us.HandleFunc("", (&UserController{}).Store).Methods("POST")
+	us.HandleFunc("/{id}", (&UserController{}).Show).Methods("GET")
+	us.HandleFunc("/{id}", (&UserController{}).Update).Methods("PUT")
+	us.HandleFunc("/{id}", (&UserController{}).Delete).Methods("DELETE")
 	ml := r.PathPrefix("/mail").Subrouter()
-	ml.HandleFunc("", mailController.Store).Methods("POST")
+	ml.HandleFunc("", (&MailController{}).Store).Methods("POST")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{os.Getenv("URL_FRONT")},

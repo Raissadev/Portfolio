@@ -14,8 +14,7 @@ type MailController struct {
 var mailService MailService
 
 func (uc *MailController) Store(w http.ResponseWriter, r *http.Request) {
-	decoder := json.NewDecoder(r.Body)
-	_, err := mailService.Send(decoder)
+	_, err := mailService.Send(json.NewDecoder(r.Body))
 
 	if err != nil {
 		uc.Message.WriteMessage(w, err.Error(), http.StatusInternalServerError)

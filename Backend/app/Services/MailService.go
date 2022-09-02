@@ -7,8 +7,12 @@ import (
 )
 
 type MailService struct {
-	ServiceInterface
 	Repository MailRepository
+	MailServiceInterface
+}
+
+type MailServiceInterface interface {
+	Send(params *json.Decoder) (Mail, error)
 }
 
 func (us *MailService) Send(params *json.Decoder) (Mail, error) {

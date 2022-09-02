@@ -7,8 +7,16 @@ import (
 )
 
 type UserService struct {
-	ServiceInterface
 	Repository UserRepository
+	UserServiceInterface
+}
+
+type UserServiceInterface interface {
+	All() []User
+	Get(id uint64) (User, error)
+	Create(params *json.Decoder) (User, error)
+	Update(id uint64, params *json.Decoder) (User, error)
+	Delete(id uint64) (bool, error)
 }
 
 func (us *UserService) All() []User {

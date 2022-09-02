@@ -1,13 +1,12 @@
 package middlewares
 
 import (
-	"api/app/utils"
-	"log"
+	. "api/app/utils"
 	"net/http"
 	"os"
 )
 
-var env utils.LoadEnv
+var env = Lenv
 
 type PermissionMiddleware struct {
 	Token map[string]string
@@ -22,7 +21,6 @@ func (pmw *PermissionMiddleware) Middleware(next http.Handler) http.Handler {
 		token := r.Header.Get("X-Session-Token")
 
 		if pmw.Token["key"] == token {
-			log.Printf("Allowed user")
 			next.ServeHTTP(w, r)
 			return
 		}

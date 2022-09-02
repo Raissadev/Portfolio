@@ -1,12 +1,9 @@
 package models
 
 import (
-	"api/app/utils"
 	"net/smtp"
 	"os"
 )
-
-var env utils.LoadEnv
 
 type Mail struct {
 	Host         string
@@ -24,8 +21,6 @@ type MailReceiver struct {
 }
 
 func (m *Mail) New() *Mail {
-	env.New()
-
 	return &Mail{
 		Host: os.Getenv("SMTP_HOST"),
 		Port: os.Getenv("SMTP_PORT"),
