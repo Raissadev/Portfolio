@@ -17,7 +17,7 @@ func (uc *MailController) Store(w http.ResponseWriter, r *http.Request) {
 	_, err := mailService.Send(json.NewDecoder(r.Body))
 
 	if err != nil {
-		uc.Message.WriteMessage(w, err.Error(), http.StatusInternalServerError)
+		uc.Message.WriteMessage(w, "invalid data!", http.StatusNotAcceptable)
 		return
 	}
 

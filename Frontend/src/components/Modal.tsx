@@ -1,19 +1,22 @@
 import React, { useState, useMemo } from "react";
 import api from '../services/api';
 import { MailProperty, MailPattern } from "../@types/mail";
-import { Modal, Layout, Form, Input, notification } from 'antd';
+import { Modal, Layout, Form, Input, notification, Button } from 'antd';
 
 const { TextArea } = Input;
 
 function Modall({show, handleAction}: any): any
 {
+    const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
     useMemo((): any => {}, [ handleAction ]);
 
     const handleOk = async () => {
         form.validateFields().then(async (values) => {
+            setLoading(true);
             await api.post("/mail", mail)
             .then((response: any) => {
+                setLoading(false);
                 notification.open({
                     message: "Email successfully sent",
                   });
@@ -29,7 +32,20 @@ function Modall({show, handleAction}: any): any
     return(
         <>
             <Layout>
-                <Modal title="Send Mail" visible={show} onOk={handleOk} onCancel={handleAction}>
+                <Modal
+                    title="Send Mail"
+                    visible={show}
+                    onOk={handleOk}
+                    onCancel={handleAction}
+                    footer={[
+                        <Button key="back" onClick={handleAction}>
+                          Cancel
+                        </Button>,
+                        <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+                          Submit
+                        </Button>,
+                    ]}
+                >
                     <Form
                         name="basic"
                         labelCol={{ span: 8 }}
@@ -51,7 +67,7 @@ function Modall({show, handleAction}: any): any
                         </Form.Item>
                         <Form.Item
                             name="email"
-                            rules={[{ required: true, message: 'Please input your email!' }]}
+                            rules={[{ type: 'email', required: true, message: 'Please input your email!' }]}
                         >
                             <Input
                                 placeholder="Email"

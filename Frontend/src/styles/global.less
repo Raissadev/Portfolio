@@ -43,6 +43,11 @@ button.ant-btn {
     background: transparent !important;
     border-radius: 2px !important;
     border: 1px solid @white !important;
+
+    &:hover {
+        background: @white-weak !important;
+        color: @dark !important;
+    }
 }
 
 // Boxes, Forms and Modals
@@ -114,6 +119,10 @@ form.ant-form {
             border-color: @dark-weak !important;
             color: @white !important;
         }
+    }
+
+    & .ant-form-item-explain-error {
+        margin-bottom: 0.8rem;
     }
 }
 
