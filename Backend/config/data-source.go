@@ -1,16 +1,18 @@
 package config
 
 import (
-	"api/app/utils"
-	"database/sql"
+	. "api/app/utils"
+	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-var env utils.LoadEnv
+var db *gorm.DB
+var env = Lenv.New()
 var Instance *gorm.DB
 
 type DataSource struct {
@@ -23,11 +25,10 @@ type DataSource struct {
 }
 
 type DataSourceInterface interface {
-	New()
+	New() *DataSource
 }
 
 func (ds *DataSource) New() *DataSource {
-	env.New()
 	return &DataSource{
 		Host:     os.Getenv("POSTGRES_HOST"),
 		Port:     os.Getenv("POSTGRES_PORT"),
@@ -38,32 +39,35 @@ func (ds *DataSource) New() *DataSource {
 	}
 }
 
-func (ds *DataSource) Open() *gorm.DB {
-	data := ds.New()
-	dbURL := ("postgres://" + data.User + ":" + data.Password + "@" + data.Host + ":" + data.Port + "/" + data.Database)
+func (ds *DataSource) GetDSN() string {
+	s := ds.New()
 
-	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
-
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	Instance = db
-
-	return db
+	return fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s", s.Host, s.User, s.Password, s.Database, s.Port, s.SSLmode)
 }
 
-func (ds *DataSource) Conn() (*sql.DB, error) {
-	db := ds.Open()
-	conn, err := db.DB()
+func (ds *DataSource) Open() error {
+	db, err := gorm.Open(postgres.New(postgres.Config{
+		DSN:                  ds.GetDSN(),
+		PreferSimpleProtocol: true,
+	}), &gorm.Config{})
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
+	dbs, err := db.DB()
+
+	dbs.SetConnMaxIdleTime(time.Minute * 5)
+	dbs.SetMaxIdleConns(10)
+	dbs.SetMaxOpenConns(100)
+	dbs.SetConnMaxLifetime(time.Hour)
+
+	db.Set("gorm:insert_modifier", "IGNORE")
+
 	Instance = db
 
-	return conn, nil
+	return err
 }
 
 func CloseDB() error {

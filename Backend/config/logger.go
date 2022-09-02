@@ -12,11 +12,12 @@ import (
 )
 
 type LoggerInterface interface {
-	Sys()
-	New()
+	Sys() *Logger
+	New() *Logger
 }
 
 type Logger struct {
+	//
 }
 
 func (l *Logger) Sys() *Logger {

@@ -12,7 +12,7 @@ import (
 	"github.com/rs/cors"
 )
 
-var env = Lenv
+var env = Lenv.New()
 
 func Router() *mux.Router {
 	pmw := PermissionMiddleware{Token: make(map[string]string)}

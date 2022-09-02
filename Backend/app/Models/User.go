@@ -49,6 +49,14 @@ func (us *User) GetAll() []User {
 }
 
 func (us *User) Create(params User) (User, error) {
+	var user User
+
+	email := us.Table().Where("email = ?", params.Email).Find(&user)
+
+	if email.RowsAffected != 0 {
+		return params, errors.New("email exists!")
+	}
+
 	data := us.Table().Save(&params)
 
 	if data.Error != nil {
