@@ -11,14 +11,14 @@ services:
     # volumes:
     # - db:/var/lib/postgresql/data
 
-  # app:
-  #   container_name: application
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   restart: on-failure
-  #   volumes:
-  #     - ./:/app
-  #   env_file:
-  #     - ./Frontend/.env
-  #     - ./Backend/.env
+  app:
+    container_name: application
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    volumes:
+      - ./:/app
+    env_file:
+      - ./Frontend/.env
+      - ./Backend/.env
