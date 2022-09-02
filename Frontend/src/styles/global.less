@@ -2,7 +2,7 @@
 
 @desktop:   ~"only screen and (min-width: 960px) and (max-width: 1199px)";
 @tablet:    ~"only screen and (min-width: 720px) and (max-width: 959px)";
-@phone:    ~"only screen and (min-width: 480px) and (max-width: 768px)";
+@phone:    ~"only screen and (min-width: 0px) and (max-width: 768px)";
 @small:    ~"only screen and (min-width: 0px) and (max-width: 480px)";
 
 * {
@@ -11,7 +11,7 @@
 
 body, .ant-layout {
     background-color: @dark;
-    background-image: url('../assets/background.png');
+    // background-image: url('../assets/background.png');
     scroll-behavior: smooth;
 }
 
@@ -62,6 +62,18 @@ button.ant-btn {
 
     & .ant-popover-arrow .ant-popover-arrow-content {
         --antd-arrow-background-color: @dark-default !important;
+    }
+
+    @media @tablet {
+        & {
+            max-width: 70vw !important;
+        }
+    }
+
+    @media @phone {
+        & {
+            max-width: 70vw !important;
+        }
     }
 }
 

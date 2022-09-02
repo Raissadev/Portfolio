@@ -37,7 +37,7 @@ function Foot(): any
                     <Button href="https://www.instagram.com/raissa_dev" type="link">Instagram</Button>
                     <Button href="https://twitter.com/Raissa_Dev" type="link">Twitter</Button>
                 </Row>
-                <Row align="middle" justify="center">
+                <Row align="middle" justify="center" className="copyright">
                     <Title level={4}>
                         ©2022 raissadev - All rights reserved
                     </Title>

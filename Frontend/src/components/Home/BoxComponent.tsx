@@ -7,7 +7,9 @@ function BoxComponent(): any
         <>
             <Layout className="boxes-component default">
                 <Row justify="space-around">
-                    <Col span={6}>
+                    <Col
+                        span={6} xxl={6} xl={6} lg={6} md={24} sm={24} xs={24}
+                    >
                         <Popover
                             content="Linux user, I've used distros like: Linux mint, Ubuntu and currently Manjaro"
                             title="Operational system"
@@ -19,7 +21,9 @@ function BoxComponent(): any
                         </Popover>
                         <Divider />
                     </Col>
-                    <Col span={6}>
+                    <Col
+                        span={6} xxl={6} xl={6} lg={6} md={24} sm={24} xs={24}
+                    >
                         <Popover
                             content="I've worked with different technologies. In addition, the language that I introduced myself to the world of
                                 computing was PHP, but I expanded my arsenal by adding stacks such as: JavaScript/TypeScript, Node, C, python, SQL and Golang...
@@ -34,7 +38,9 @@ function BoxComponent(): any
                         </Popover>
                         <Divider />
                     </Col>
-                    <Col span={6}>
+                    <Col
+                        span={6} xxl={6} xl={6} lg={6} md={24} sm={24} xs={24}
+                    >
                         <Popover
                             content="I find it easy to learn, in part because I'm constantly studying.
                                 However, I do not have very good communication, as I am a shy person. 🙂

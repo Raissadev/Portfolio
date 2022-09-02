@@ -118,6 +118,12 @@ section.banner-home {
                 font-size: 2.2rem;
             }
         }
+
+        @media @small {
+            & {
+                font-size: 1.2rem;
+            }
+        }
     }
 
     & .ant-row.attach h4 {
@@ -154,6 +160,13 @@ section.banner-home {
                 bottom: 20%;
             }
         }
+
+        @media @small {
+            & {
+                left: -30%;
+                bottom: 30%;
+            }
+        }
     }
 
     @media @tablet {
@@ -182,13 +195,19 @@ section.message-component {
 
         @media @tablet {
             & {
-                font-size: 2.5rem;
+                font-size: 2.7rem;
             }
         }
     
         @media @phone {
             & {
-                font-size: 2.5rem;
+                font-size: 2.7rem;
+            }
+        }
+
+        @media @small {
+            & {
+                font-size: 2rem;
             }
         }
     }
@@ -233,6 +252,18 @@ section.boxes-component {
             border-top: 10px transparent !important;
             background: linear-gradient(to bottom, rgba(255,0,0,0), #08030F);
         }
+
+        @media @tablet {
+            & {
+                margin-bottom: 3rem;
+            }
+        }
+    
+        @media @phone {
+            & {
+                margin-bottom: 6rem;
+            }
+        }
     }
 }
 
@@ -250,6 +281,24 @@ section.interests-component {
 
     & .ant-col h2.ant-typography {
         font-size: 4.5rem;
+
+        @media @tablet {
+            & {
+                font-size: 3.5rem;
+            }
+        }
+    
+        @media @phone {
+            & {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media @small {
+            & {
+                font-size: 3rem;
+            }
+        }
     }
 
     & .ant-col img.ant-image-img {
@@ -263,6 +312,18 @@ section.interests-component {
         &::before, &.ant-divider-no-default-orientation-margin-left::after {
             height: 2px;
             background-color: @white-weak;
+        }
+    }
+
+    @media @tablet {
+        & .ant-image {
+            width: 100% !important;
+        }
+    }
+
+    @media @phone {
+        & .ant-image {
+            width: 100% !important;
         }
     }
 }
@@ -286,11 +347,43 @@ footer.ant-layout-footer {
 
             & h2.ant-typography {
                 font-size: 5rem !important;
+
+                @media @tablet {
+                    & {
+                        font-size: 3rem !important;
+                    }
+                }
+            
+                @media @phone {
+                    & {
+                        font-size: 3rem !important;
+                    }
+                }
+
+                @media @small {
+                    & {
+                        font-size: 2.2rem !important;
+                    }
+                }
             }
 
             & button.ant-btn {
                 height: 55px;
                 padding: 6.4px 6rem;
+
+                @media @tablet {
+                    & {
+                        height: 45px;
+                        padding: 6.4px 4rem;
+                    }
+                }
+            
+                @media @phone {
+                    & {
+                        height: 45px;
+                        padding: 6.4px 4rem;
+                    }
+                }
             }
         }
 
@@ -302,14 +395,44 @@ footer.ant-layout-footer {
                 color: @white !important;
                 font-size: 1.2rem !important;
                 margin: 0 2rem;
-            }
-        }
 
-        &:last-child {
-            h4.ant-typography {
-                font-weight: 400 !important;
-                font-size: 1rem !important;
+                @media @tablet {
+                    & {
+                        margin: 0 1.5rem;
+                    }
+                }
+            
+                @media @phone {
+                    & {
+                        margin: 0 1rem;
+                    }
+                }
+
+                @media @small {
+                    & {
+                        width: 100% !important;
+                    }
+                }
             }
         }
+    }
+
+    @media @tablet {
+        & {
+            padding: 5rem 3rem 1rem 3rem;
+        }
+    }
+
+    @media @phone {
+        & {
+            padding: 5rem 3rem 1rem 3rem;
+        }
+    }
+}
+
+.copyright {
+    & h4.ant-typography {
+        font-weight: 400 !important;
+        font-size: 1rem !important;
     }
 }
