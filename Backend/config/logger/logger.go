@@ -1,10 +1,12 @@
 package logger
 
 import (
-	"flag"
-	"log"
+	"fmt"
 	"os"
-	"path/filepath"
+
+	logg "log"
+
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -12,17 +14,26 @@ var (
 )
 
 func init() {
-	var logpath, _ = filepath.Abs("app/log/log.txt")
+	var filename string = "app/log/logfile.log"
 
-	flag.Parse()
-	var file, err = os.Open(logpath)
+	f, err := os.OpenFile(filename, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
+
+	Formatter := new(log.TextFormatter)
+
+	Formatter.FullTimestamp = true
+
+	log.SetFormatter(&log.TextFormatter{
+		DisableColors: false,
+		FullTimestamp: true,
+	})
 
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+	} else {
+		log.SetOutput(f)
 	}
 
-	Log = log.New(file, "", log.LstdFlags|log.Lshortfile)
-	Log.Println("LogFile : " + logpath)
+	log.Info(os.Stdout, logg.Llongfile, logg.LstdFlags, logg.Lshortfile)
 
-	defer file.Close()
+	defer f.Close()
 }
