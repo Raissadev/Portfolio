@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import api from '../services/api';
 import { MailProperty, MailPattern } from "../@types/mail";
 import { Modal, Layout, Form, Input, notification, Button } from 'antd';
@@ -9,7 +9,8 @@ function Modall({show, handleAction}: any): any
 {
     const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
-    useMemo((): any => {}, [ handleAction ]);
+
+    useEffect((): any => {}, [ handleAction ]);
 
     const handleOk = async () => {
         form.validateFields().then(async (values) => {
