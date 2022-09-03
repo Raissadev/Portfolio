@@ -1,13 +1,13 @@
-BINARY_NAME=application
-exec = app
+BINARY_NAME = application
+exec = application
 
 build:
-	make
-	cd ./Backend
-	GOARCH=amd64 GOOS=linux go build -o ${BINARY_NAME} main.go
+	ls;
+	cd ./Backend && go mod download;
+	cd ./Backend && go build -o bin/${BINARY_NAME}
 
 run:
-	./${BINARY_NAME}
+	cd ./Backend && ./bin/${BINARY_NAME}
 
 run_app: build run
 
