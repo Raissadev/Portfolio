@@ -15,6 +15,13 @@ services:
     env_file:
       - ./.env
 
+  migrate:
+    image: migrate/migrate
+    depends_on:
+      - postgres
+    command:
+      [ "-path", "./database/migrations", "-database",  $DATABASE_URL, "up" ]
+
   app:
     container_name: application-backend
     build:
