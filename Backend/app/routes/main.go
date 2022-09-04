@@ -46,7 +46,7 @@ func Router() *mux.Router {
 
 	handler := c.Handler(api)
 
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("SERVER_PORT"), handler))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), handler))
 
 	return router
 }

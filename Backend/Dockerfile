@@ -10,6 +10,6 @@ COPY . .
 
 RUN go build -o ./application
 
-EXPOSE $PORT
+# EXPOSE $PORT
 
 CMD ["./application"]

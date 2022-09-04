@@ -1,6 +1,8 @@
 # Portfolio
 
-...
+Hello guys! I decided to develop a very simple website to talk a little 
+about my professional experience... But that's all, in short 
+I'm just a nerd passionate about computing 🤓
 
 - Obs: to avoid environment problems, I recommend uploading with docker!
 
