@@ -8,8 +8,8 @@ RUN go mod download && go mod verify
 
 COPY . .
 
-RUN go build -o ./bin/application
+RUN go build -o ./application
 
 EXPOSE $PORT
 
-CMD ["./bin/application"]
+CMD ["./application"]

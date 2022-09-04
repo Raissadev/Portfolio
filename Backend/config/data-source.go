@@ -16,12 +16,13 @@ var env = Lenv.New()
 var Instance *gorm.DB
 
 type DataSource struct {
-	Host     string
-	Port     string
-	Password string
-	User     string
-	Database string
-	SSLmode  string
+	Host         string
+	Port         string
+	Password     string
+	User         string
+	Database     string
+	SSLmode      string
+	DATABASE_URL string
 }
 
 type DataSourceInterface interface {
@@ -30,20 +31,20 @@ type DataSourceInterface interface {
 
 func (ds *DataSource) New() *DataSource {
 	return &DataSource{
-		Host:     os.Getenv("POSTGRES_HOST"),
-		Port:     os.Getenv("POSTGRES_PORT"),
-		Password: os.Getenv("POSTGRES_PASSWORD"),
-		User:     os.Getenv("POSTGRES_USER"),
-		Database: os.Getenv("POSTGRES_DB_NAME"),
-		SSLmode:  "disable",
+		Host:         os.Getenv("POSTGRES_HOST"),
+		Port:         os.Getenv("POSTGRES_PORT"),
+		Password:     os.Getenv("POSTGRES_PASSWORD"),
+		User:         os.Getenv("POSTGRES_USER"),
+		Database:     os.Getenv("POSTGRES_DB_NAME"),
+		DATABASE_URL: os.Getenv("DATABASE_URL"),
+		SSLmode:      "disable",
 	}
 }
 
 func (ds *DataSource) GetDSN() string {
 	s := ds.New()
 
-	return fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s", s.Host, s.User, s.Password, s.Database, s.Port, s.SSLmode)
+	return fmt.Sprintf(s.DATABASE_URL)
 }
 
 func (ds *DataSource) Open() error {

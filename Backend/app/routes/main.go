@@ -4,6 +4,7 @@ import (
 	. "api/app/Http/Controllers"
 	. "api/app/Http/Middlewares"
 	. "api/app/utils"
+	"encoding/json"
 	"log"
 	"net/http"
 	"os"
@@ -25,6 +26,9 @@ func Router() *mux.Router {
 	api.Use(mux.CORSMethodMiddleware(api))
 	api.Use((&HeadersDefaultMiddleware{}).Middleware)
 
+	api.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]string{"message": "Hello World! :)"})
+	})
 	us := api.PathPrefix("/users").Subrouter()
 	us.Use(pmw.Middleware)
 	us.HandleFunc("", (&UserController{}).Index).Methods("GET")
@@ -42,7 +46,7 @@ func Router() *mux.Router {
 
 	handler := c.Handler(api)
 
-	log.Fatal(http.ListenAndServe(os.Getenv("SERVER_PORT"), handler))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("SERVER_PORT"), handler))
 
 	return router
 }
