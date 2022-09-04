@@ -1,5 +1,6 @@
 header.ant-layout-header {
     background: transparent;
+    overflow: hidden;
 
     & .ant-row .ant-menu-horizontal {
         background: transparent;
@@ -12,12 +13,16 @@ header.ant-layout-header {
     }
 
     @media @tablet {
+        padding: 0 10px !important;
+
         & .ant-menu {
             justify-content: flex-end;
         }
     }
 
     @media @phone {
+        padding: 0 10px !important;
+
         & .ant-menu {
             justify-content: flex-end;
         }
@@ -60,6 +65,7 @@ section.banner-home {
     padding: 9rem 1rem 7rem 1rem;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 
     & .ant-row:first-child {
         margin-bottom: 3rem;
@@ -129,16 +135,17 @@ section.banner-home {
     & .ant-row.attach {
         position: relative;
         height: 0vh;
-        width: 100%;
+        width: 100vw;
         display: flex;
         align-items: center;
         justify-content: flex-start;
 
         & h4 {
-            margin-left: -5% !important;
+            margin-left: -6% !important;
             transform: rotate(-90deg);
             display: flex;
             flex-direction: row;
+            opacity: 0.8;
 
             & span {
                 margin-right: 1rem;
@@ -155,13 +162,13 @@ section.banner-home {
 
             @media @tablet {
                 & {
-                    margin-left: -20% !important;
+                    margin-left: -18% !important;
                 }
             }
         
             @media @phone {
                 & {
-                    margin-left: -30% !important;
+                    margin-left: -18% !important;
                 }
             }
 

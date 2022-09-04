@@ -20,7 +20,7 @@ function BannerComponent(): any
                 <Row>
                     <Col span={24}>
                         <Title level={1}>
-                            INDEPENDENT FULL-STACK <br /> SOFTWARE ENGINNER
+                        ENTHUSIASTIC FULL-STACK <br /> SOFTWARE ENGINNER
                         </Title>
                     </Col>
                     <Col span={24}>
