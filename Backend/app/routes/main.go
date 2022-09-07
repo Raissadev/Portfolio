@@ -23,7 +23,6 @@ func Router() *mux.Router {
 
 	api := router.PathPrefix("/api/v1").Subrouter()
 
-	api.Use(mux.CORSMethodMiddleware(api))
 	api.Use((&HeadersDefaultMiddleware{}).Middleware)
 
 	api.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

@@ -15,15 +15,16 @@ function Modall({show, handleAction}: any): any
     const handleOk = async () => {
         form.validateFields().then(async (values) => {
             setLoading(true);
-            await api.post("/mail", mail)
-            .then((response: any) => {
-                setLoading(false);
-                notification.open({
-                    message: "Email successfully sent",
-                  });
+            await api.post("/mail", mail).then((response: any) => {
+                
             })
             .catch( (err: any) => {
                 console.log('Invalid!');
+            });
+
+            setLoading(false);
+            notification.open({
+                message: "Email successfully sent",
             });
         }).catch();
     };
